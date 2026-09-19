@@ -1,0 +1,23 @@
+{
+  "port": 4317,
+  "libraryRoot": "C:/path/to/agent-library",
+  "dataRoot": "C:/path/to/graph-data",
+  "herdrPath": "C:/path/to/herdr.exe",
+  "claudePath": "",
+  "codexPath": "C:/path/to/codex.exe",
+  "concurrency": 2,
+  "timeoutMs": 600000,
+  "defaultModel": "codex:default",
+  "models": [
+    {
+      "id": "codex:default",
+      "label": "Codex — configured default model",
+      "tier": "balanced"
+    }
+  ],
+  "ghPath": "C:/path/to/gh.exe",
+  "githubAgentAuth": false,
+  "nodePath": "C:/path/to/node.exe",
+  "gitPath": "C:/path/to/git.exe",
+  "herdrSession": "graph-4317"
+}

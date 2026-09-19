@@ -1,0 +1,33 @@
+{
+  "platform": "windows-x64",
+  "node": {
+    "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-win-x64.zip",
+    "executable": "node-v24.21.0-win-x64/node.exe",
+    "sha256": "158f7685b44de51f6c0df1d153526cbcd3e1bc739a8dfc607721cef75de9e541",
+    "version": "24.21.0"
+  },
+  "herdr": {
+    "url": "https://github.com/herdrdev/herdr/releases/download/v0.9.1/herdr-windows-x86_64.zip",
+    "executable": "herdr.exe",
+    "sha256": "04ce380cac5af27bfcf75d0951ac49b7afe4c984aee8852985806d4f71f93a6e",
+    "version": "0.9.1"
+  },
+  "git": {
+    "url": "https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/MinGit-2.55.0.5-64-bit.zip",
+    "executable": "cmd/git.exe",
+    "sha256": "56d7b226b7693196cfc71fef26568f536c4a021ab6c37ff2db4287bed908e96e",
+    "version": "v2.55.0.windows.5"
+  },
+  "gh": {
+    "url": "https://github.com/cli/cli/releases/download/v2.101.0/gh_2.101.0_windows_amd64.zip",
+    "executable": "bin/gh.exe",
+    "sha256": "bc6c814367b193cd8e713611d61e36013c0ef843b8f516458fe3eda039192794",
+    "version": "2.101.0"
+  },
+  "codex": {
+    "url": "https://registry.npmjs.org/@openai/codex/-/codex-0.155.1-win32-x64.tgz",
+    "integrity": "sha512-MO+cCZrgU0Ec7lJP/5NsTe5obJ9/qtRMkQUK0jYWTY1omxLA3lp5IOD2IAmsejlEJB931XRo51LZ7hl178CDjA==",
+    "executable": "package/vendor/x86_64-pc-windows-msvc/bin/codex.exe",
+    "version": "0.155.1"
+  }
+}

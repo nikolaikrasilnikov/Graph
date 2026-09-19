@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Graph — пространство для идей и агентов</title><link rel="icon" href="/graph-icon.svg?v=5" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/sessions.css"></head>
+<body>
+<aside class="sidebar">
+<a class="brand" href="/" aria-label="Graph — главная"><img class="brand-icon" src="/graph-icon.svg?v=5" alt=""><b>graph<span class="cursor-mark">_</span></b><span class="badge">LOCAL</span></a>
+<div class="project-picker"><label for="projectSelect">Проект</label><div><select id="projectSelect" aria-label="Проект"></select><button id="newProject" title="Новый проект" aria-label="Новый проект">＋</button></div></div>
+<div id="projectList" hidden></div><span id="projectCount" hidden></span>
+<div class="library-heading"><b>Библиотека</b><span id="libraryCount"></span></div>
+<div class="library-shortcuts"><button id="libraryHome">Agent Library</button><button id="libraryComputer">Компьютер</button></div><form id="pathForm" class="path-form"><input id="pathInput" aria-label="Путь к папке" placeholder="C:\…"><button aria-label="Перейти по пути">↵</button></form><input id="librarySearch" type="search" placeholder="Поиск в раскрытых папках…" aria-label="Поиск в библиотеке">
+<div class="library-location"><button id="libraryBack" aria-label="На папку выше">↑</button><span id="libraryLocation">Библиотека</span></div>
+<div id="libraryTree" class="library-tree" aria-label="Файлы библиотеки"></div>
+<p class="library-help">Перетащите файл или папку на ноду.<br>На главного агента — для подбора контекста.</p>
+<nav><button data-view="graph" class="nav active">Граф проекта</button><button data-view="sessions" class="nav">Сессии</button><button data-view="history" class="nav">История запусков</button><button data-view="memory" class="nav">Память проекта</button></nav>
+<span id="attachmentCount" hidden></span><div class="sidebar-bottom"><div id="connection" class="connection">Проверяю Herdr…</div></div>
+</aside>
+<main>
+  <header><div class="breadcrumbs">Проекты <span>/</span> <b id="projectTitle">Загрузка…</b> <span>/</span> <span id="viewName">Граф</span></div><div class="header-right"><span class="local-indicator">● Локально</span><button id="export" class="icon-button" title="Экспорт графа">Экспорт</button></div></header>
+  <section class="workspace" id="graphView">
+    <div class="toolbar"><div><span class="eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО</span><h1>Граф сессий</h1><p>Задачи, связи и контекст ваших агентов.</p></div><div class="toolbar-actions"><button id="result" hidden>Результат ↗</button><button id="projectSettings">Настройки</button><button id="journal">Журнал</button><button id="save">Сохранить</button><button id="run" class="primary">▶ Запустить граф</button><button id="stop" class="danger" hidden>■ Остановить</button></div></div>
+    <div class="stage"><div class="canvas" id="canvas"><div id="world" class="world"><div id="groups"></div><svg id="edges" class="edges"></svg><div id="nodes"></div></div><div id="emptyHint" class="empty-hint"><div class="empty-symbol" aria-hidden="true">▪ ─ ▪<br>　　│<br>　　▪</div><h2>Одна задача.<br>Связанные сессии.</h2><p>Добавьте ноду и перенесите в неё файлы слева.<br>Или опишите задачу — агент предложит граф.</p></div></div>
+    <div class="canvas-chips"><span class="chip"><i class="dot"></i><span id="graphStatus">Черновик</span></span><span class="chip" id="nodeCount">0 узлов</span><span class="chip"><span id="parallelCount">Параллельные сессии</span></span></div>
+    <div class="canvas-tools"><button id="zoomOut" title="Уменьшить">−</button><span id="zoomLabel">100%</span><button id="zoomIn" title="Увеличить">＋</button><button id="fit" title="Показать весь граф">Вписать</button><span class="tool-divider"></span><button id="addMaster">＋ Мастер-промпт</button><button id="addNode">＋ Узел</button></div>
+    <div class="legend"><i class="dot"></i> Готово <i class="dot purple"></i> Выполняется <i class="dot gray"></i> Ожидает</div>
+    </div>
+    <section id="sessionDock" class="session-dock" hidden><div class="dock-head"><b id="dockTitle">Журнал сессии</b><button id="closeDock" aria-label="Закрыть журнал">✕</button></div><pre id="dockText"></pre><div id="terminalActions"><div class="terminal-bar"><span id="terminalStatus">Сессия</span><button id="connectTerminal">Открыть терминал</button><button id="showNodeLog">Журнал</button><button id="showNodeResult">Результат</button></div><form id="terminalForm"><textarea id="terminalInput" rows="2" aria-label="Сообщение агенту" placeholder="Напишите агенту… Enter — отправить, Shift+Enter — новая строка"></textarea><button id="terminalSend" class="primary">Отправить</button></form><div class="terminal-keys"><span>Управление терминалом</span><button data-terminal-key="up">↑</button><button data-terminal-key="down">↓</button><button data-terminal-key="tab">Tab</button><button data-terminal-key="enter">Enter</button><button data-terminal-key="esc">Esc</button><button data-terminal-key="ctrl+c">Прервать</button></div><p class="dock-note">Продолжение сохраняется в сессии агента. Итог графа остаётся снимком завершённого запуска.</p></div></section><div class="composer" id="composer"><div class="composer-heading"><b>Первый мастер-промпт</b><span id="saveStatus">Сначала план, затем запуск</span></div><textarea id="request" rows="2" placeholder="Например: подготовь план запуска моего проекта и короткий текст для презентации…"></textarea><div id="sharedContext" class="context-list"></div><div class="composer-bottom"><div class="composer-options"><label>Планировщик <select id="plannerModel"></select></label><button id="attach" class="subtle">Библиотека планировщика <span id="contextCount">0</span></button></div><button id="plan" class="primary">Создать мастер-промпт <span>↗</span></button></div></div>
+  </section>
+  <section id="otherView" class="other-view" hidden></section>
+</main>
+<aside class="inspector"><div class="inspector-title"><span>СВОЙСТВА</span><span class="dim">GRAPH</span></div><div id="inspectorContent"></div><div class="inspector-bottom"><span>↳</span><p>Нажмите на узел, чтобы изменить модель, инструкцию или посмотреть результат.</p></div></aside>
+<div id="toast" role="status" hidden></div>
+<dialog id="viewer"><div class="dialog-head"><b id="viewerTitle"></b><button id="closeViewer">✕</button></div><div class="document-toolbar"><button id="documentMode">Исходный текст</button></div><article id="viewerDocument" class="readable"></article><pre id="viewerText" hidden></pre><div id="viewerActions"></div></dialog>
+<script type="module" src="/app.js"></script>
+</body></html>

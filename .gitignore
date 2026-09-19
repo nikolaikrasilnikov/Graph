@@ -1,0 +1,22 @@
+# Local configuration, credentials, runtime, generated output
+config.json
+.server.pid
+*.log
+.scratch/
+.tools/
+artifacts/
+reports/
+research/
+node_modules/
+.graph-inputs/
+.env
+.env.*
+*.pem
+*.key
+
+.runtime/
+.downloads/
+.graph-data/
+library/
+dist/
+config.json.backup*
